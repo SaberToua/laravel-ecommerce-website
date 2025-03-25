@@ -15,18 +15,19 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @auth
                 </div>
                 @if(Auth::user()->role=='admin')
-                
+
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
-                   
+
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('Ship.index')" :active="request()->routeIs('Ship.index')">
                         {{ __('Shippings 🚚 ') }}
                     </x-nav-link>
                 </div>
-              
-                  
+
+
                     <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')">
                         {{ __('Add product ➕ ') }}
                     </x-nav-link>
@@ -39,13 +40,13 @@
                  <div class="hiden space-x-8 sm:-xy-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('product.admin_show')" :active="request()->routeIs('admin_show')">
                         {{ __('Products List 📃') }}
-                    </x-nav-link> 
+                    </x-nav-link>
                  </div>
-               
-             
+
+
                 @endif
-            </div>
-        
+            </div> @endauth
+
             <div class="flex">
                 <!-- Logo
                 <div class="shrink-0 flex items-center">
@@ -63,11 +64,12 @@
             </div>
 
             <!-- Settings Dropdown -->
+            @auth
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                      @auth <div>{{ Auth::user()->name }}</div> @endauth
+                    <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -95,7 +97,7 @@
                     </x-slot>
                 </x-dropdown>
             </div>
-
+   @endauth
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
@@ -116,6 +118,8 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
+@auth
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
@@ -140,6 +144,6 @@
                     </x-responsive-nav-link>
                 </form>
             </div>
-        </div>
+        </div> @endauth
     </div>
 </nav>

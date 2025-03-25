@@ -13,12 +13,11 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CatigoryController;
 use App\Http\Controllers\ShippingController;
-use App\Http\Controllers\WebhookController; 
+use App\Http\Controllers\WebhookController;
 
 Route::post('/webhook', [WebhookController::class, 'handleWebhook']);
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/search', [ProductController::class, 'search'])->name('product.search');
+    Route::get('/', [ProductController::class, 'show'])->name('product.show');
 Route::get('/about', function () {
     return view('about');
 });
@@ -39,8 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/add to card', [CardController::class, 'store'])->name('card.store');
     Route::post('/order/{product}', [OrderController::class, 'store'])->name('order.store');
     //Route::get('/products-admin', [ProductController::class, 'admin_show'])->name('product.admin_show');
-    Route::get('/search', [ProductController::class, 'search'])->name('product.search');
-    Route::get('/products', [ProductController::class, 'show'])->name('product.show');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -62,7 +60,7 @@ Route::get('/items/{order_id}', [ShippingController::class, 'items'])->name('Shi
     Route::get('/Shipping/inroute/{id}', [ShippingController::class, 'inroute'])->name('Ship.inroute');
     Route::get('/Shipping/delete/{id}', [ShippingController::class, 'destroy'])->name('Ship.delete');
 Route::middleware([admin::class])->group(function () {
-    
+
     Route::post('/destroy_product/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
     Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
     Route::post('/update_product/{id}', [ProductController::class, 'update'])->name('product.update');

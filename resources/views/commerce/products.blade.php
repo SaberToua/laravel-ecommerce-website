@@ -1,5 +1,5 @@
 
-                                
+
     <style>
         h1{
             font-size:xx-large;
@@ -88,11 +88,11 @@
         }
     </script>
 <x-app-layout>
-    
+
         <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
             <!-- Search Form -->
             <form action="{{ route('product.search') }}" method="GET">
-                
+
                 <div>
                     <x-input-label for="search" :value="__('search')" />
                     <x-text-input id="search" class="block mt-1 w-full bg-violet-200" type="text" name="search" :value="old('search')" required autofocus autocomplete="search" placeholder=" 🔍 Search for products..." required/>
@@ -104,13 +104,13 @@
             </form>
         </div>
         <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-        
+
            <h1>Products List 📃: </h1> </div>
     <br>
         <div id="work-offers-list" class="mx-4 colored lg:grid lg:grid-cols-3 gap-4 space-y-4 md:space-y-0">
-                
+
        @foreach($products as $product)
-       
+
        <div  style="border-radius: 10%" class=" bg-violet-300 shadow-sm ">
         <div class="lg:grid lg:grid-cols-2">
             <div class="product-card bg-violet-100  ">
@@ -124,14 +124,14 @@
                             .then(response => response.json())
                             .then(data => {
                         var imageElement = document.getElementById('{{$product->id}}.image');
-                       
+
                             imageElement.src = '/storage/'+data.image_url;
                             });
                     },5000);
-                
-                   
+
+
                 </script>
-                
+
                 <div class="product-info">
                     <p id="{{$product->id}}" class="product-name">{{ $product->name }}</p>
                     <script>
@@ -160,13 +160,13 @@
                                 .then(response => response.json())
                                 .then(data => {
                                     document.getElementById('{{$product->id}}.price').innerText ='$'+ data.price +'💲';
-                                    
-                                    
+
+
                                 });
                         }, 5000); // Poll every 5 seconds
                     </script>
                   </div>
-                
+
              </div>
              <div>
                 <form method="POST" action="{{ route('card.store') }}" class="ml-10">
@@ -174,21 +174,21 @@
                   @method('post')
                   <div class="mt-4">
                       <x-input-label for="quantity" :value="__('quantity')" />
-          
+
                       <x-text-input id="quantity" class=" block mt-1 w-full "
                                       type="number"
                                       max="{{$product->stock}}"
                                       name="quantity"
                                       required autocomplete="new-quantity" />
-          
+
                       <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
                   </div>
                   <input type="hidden" name="product_id" value="{{ $product->id }}">
                   <x-primary-button class="ms-4">  {{ __('Add to Card ') }}</x-primary-button>🛒
-                  
+
               </form>
           </div>
-             
+
         </div>
                 <div class="p-6 flex space-x-2" >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 -scale-x-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -197,9 +197,9 @@
                     <div class="flex-1">
                         <div class="flex justify-between items-center">
                             <div>
-                                
+
                                 <small class="ml-2 text-sm text-gray-600">{{ $product->created_at->format('j M Y, g:i a') }}</small>
-                                
+
                             </div>
                           {{--}}  @if ($product->user->is(auth()->user()))--}}
                                 <x-dropdown>
@@ -211,23 +211,23 @@
                                         </button>
                                     </x-slot>
                                     <x-slot name="content">
-                                        
-                                       
+
+
                                     </x-slot>
                                 </x-dropdown>
                                 <x-slot name="content">
-                                        
-                                    
+
+
                                 </x-slot>
-                           
+
                         </div>
-                       
+
                     </div>
                 </div>
                 <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
           @php $id=$product->id @endphp
 
-   
+
 {{--
                     <form method="POST"  action="{{route('review',$id)}}">
                         @csrf
@@ -241,9 +241,9 @@
                         <x-primary-button class="mt-4">{{ __('send') }}</x-primary-button>
                     </form>
                  --}}
-                                        
-                 </div> 
-                 <div class="flex items-center justify-center space-x-1" id="star-rating-container-{{ $product->id }}"> 
+
+                 </div>
+                 <div class="flex items-center justify-center space-x-1" id="star-rating-container-{{ $product->id }}">
                     @for ($i = 1; $i <= 5; $i++)
                         <button
                             class="star-rating text-gray-500 hover:text-yellow-500 cursor-pointer"
@@ -256,17 +256,17 @@
                         </button>
                     @endfor
                 </div>
-                
-                
+
+
                 <script>
                     // Assuming user rating is passed as a variable from backend
                     const userRating = 3; // Replace this with the actual rating for the product
-                
+
                     // Function to update the star visuals
                     function updateStarRating(productId, rating) {
                         const container = document.getElementById(`star-rating-container-${productId}`);
                         const stars = container.querySelectorAll('.star-rating');
-                
+
                         stars.forEach((star, index) => {
                             if (index < rating) {
                                 star.innerHTML = '&#9733;'; // Filled Star
@@ -279,11 +279,11 @@
                             }
                         });
                     }
-                
+
                     // Initialize stars with user rating
                     updateStarRating({{ $product->id }}, userRating);
                 </script>
-            
+
        </div>
                     @endforeach
                 </div>
@@ -294,11 +294,9 @@
                   {{__('Order 💰')}}
                 </x-primary-button>💰
                 </form></div>
-     <x-dropdown-link href="{{route('Ship.inroute',19)}}">
-                    {{ __('send') }}
-                </x-dropdown-link>
-       
-   
+
+
+
    <br> <br> <br> <br> <br> <br> <br>
-   
+
 </x-app-layout>

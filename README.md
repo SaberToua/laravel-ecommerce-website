@@ -1,15 +1,8 @@
 
 # Web Development Project
-### Next Steps:
 
-1. **Take a screenshot** of the products page and save it as `products-page.png`.
-2. **Move the image** to the project root (same directory as `README.md`).
-3. **Push the updated files** to GitHub:
+![Alt Text](Screenshot.png)
 
-   ```sh
-   git add README.md Screenshot.png
-   git commit -m "Updated README with Stripe config and added product page screenshot"
-   git push origin main
 
 ## Setup Instructions
 

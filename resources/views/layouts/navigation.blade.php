@@ -39,7 +39,7 @@
                 </div>
                  <div class="hiden space-x-8 sm:-xy-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('product.admin_show')" :active="request()->routeIs('admin_show')">
-                        {{ __('Products List 📃') }}
+                        {{ __(' ⚙ Manage Products ') }}
                     </x-nav-link>
                  </div>
 
